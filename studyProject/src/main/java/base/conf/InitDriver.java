@@ -4,15 +4,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class InitDriver {
 
     protected static WebDriver webDriver;
+    private static InitDriver instance;
 
+    protected InitDriver() { }
+
+    public static InitDriver getInstance() {
+        if (instance == null) {
+            instance = new InitDriver();
+        }
+        return instance;
+    }
 
     @Parameters("browser")
     @BeforeTest
@@ -37,4 +43,5 @@ public class InitDriver {
         if (webDriver != null)
             webDriver.quit();
     }
+
 }
