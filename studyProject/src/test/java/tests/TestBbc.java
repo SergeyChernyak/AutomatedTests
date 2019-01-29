@@ -1,19 +1,15 @@
 package tests;
 
-import base.conf.InitDriver;
+import base.conf.BaseTest;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import base.page.BbcPage;
 
-public class TestBbc extends InitDriver {
-
-    private BbcPage bbcPage = new BbcPage();
+public class TestBbc extends BaseTest {
 
     @Test
     public void checkField() {
-        bbcPage
+        basePage.bbcPage
                 .getUrl("https://www.bbc.com/")
                 .enterText("TEST");
         Assert.assertEquals("https://www.bbc.co.uk/search?q=TEST", (webDriver.getCurrentUrl()));
@@ -21,24 +17,18 @@ public class TestBbc extends InitDriver {
 
     @Test
     public void checkIsDisplayed() {
-        //bbcPage
-               // .getUrl("https://www.bbc.com/");
         Assert.assertEquals(true, ((webDriver.findElement(By.cssSelector("#orb-search-q"))).isDisplayed()));
     }
 
     @Test
     public void checkIsEnabled() {
-       // bbcPage
-              //  .getUrl("https://www.bbc.com/");
         Assert.assertEquals(true, ((webDriver.findElement(By.cssSelector("#orb-search-q"))).isEnabled()));
     }
 
     @Test
     public void checkNavigationButton () {
-        bbcPage
-            //.getUrl("https://www.bbc.com/")
+        basePage.bbcPage
             .clickToButton();
         Assert.assertEquals("https://www.bbc.com/weather", webDriver.getCurrentUrl());
     }
-
 }
