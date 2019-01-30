@@ -4,13 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.Parameters;
+
+import java.util.Objects;
 
 public class Driver {
 
-    protected static WebDriver webDriver;
+    private static WebDriver webDriver;
 
-    protected WebDriver getDriver(String browser) {
-        if (webDriver == null) {
+    @Parameters("browser")
+    private static WebDriver getDriver(String browser) {
+        if (Objects.isNull(webDriver)) {
             switch (browser) {
                 case "chrome":
                     System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
@@ -25,8 +29,20 @@ public class Driver {
                     webDriver = new InternetExplorerDriver();
                     break;
             }
+        if (Objects.nonNull(webDriver)) {
             webDriver.manage().window().maximize();
+            }
         }
-            return webDriver;
+        return webDriver;
+    }
+
+    public static WebDriver getWebDriver() {
+        return Objects.isNull(webDriver) ? getDriver("chrome") : webDriver;
+    }
+
+    public static void closeDriver() {
+        if (Objects.nonNull(webDriver)) {
+            webDriver.quit();
+        }
     }
 }

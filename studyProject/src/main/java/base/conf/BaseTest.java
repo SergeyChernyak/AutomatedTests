@@ -1,21 +1,11 @@
 package base.conf;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterSuite;
 
+public class BaseTest {
 
-public class BaseTest extends Driver{
-    protected BasePage basePage;
-
-    @BeforeClass
-    public void setup () {
-        super.getDriver("chrome");
-        basePage = new BasePage(webDriver);
-    }
-
-    @AfterClass
+    @AfterSuite
     protected void closeDriver () {
-        if (webDriver != null)
-            webDriver.quit();
+        Driver.closeDriver();
     }
 }
