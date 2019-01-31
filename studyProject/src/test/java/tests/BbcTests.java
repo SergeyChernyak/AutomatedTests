@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class BbcTest extends BaseTest {
+public class BbcTests extends BaseTest {
 
     private BbcPage bbcPage = new BbcPage();
     private WebDriver driver = Driver.getWebDriver();
@@ -19,24 +19,24 @@ public class BbcTest extends BaseTest {
     }
 
     @Test (priority = 0)
-    public void checkSearchInput() {
+    public void checkSearchInputTest() {
         bbcPage
                 .textEnter("TEST");
         Assert.assertEquals("https://www.bbc.co.uk/search?q=TEST", bbcPage.returnCurrUrl());
     }
 
     @Test (priority = 1)
-    public void checkIsDisplayedSearchInput() {
-        Assert.assertEquals(true, bbcPage.returnSearchInput().isDisplayed());
+    public void checkIsDisplayedSearchInputTest() {
+        Assert.assertTrue(bbcPage.isDisplayedSearchInput());
     }
 
     @Test (priority = 2)
-    public void checkIsEnabledSearchInput() {
-        Assert.assertEquals(true, bbcPage.returnSearchInput().isEnabled());
+    public void checkIsEnabledSearchInputTest() {
+        Assert.assertTrue(bbcPage.isEnabledSearchInput());
     }
 
     @Test (priority = 3)
-    public void checkNavigationButton () {
+    public void checkNavigationButtonTest() {
         bbcPage
             .clickOnNavigationWeatherButton();
         Assert.assertEquals("https://www.bbc.com/weather", bbcPage.returnCurrUrl());

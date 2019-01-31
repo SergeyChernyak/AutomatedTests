@@ -35,11 +35,17 @@ public class BbcPage {
         return this;
     }
 
-    public WebElement returnSearchInput () {
-        return searchInput;
+    public boolean isDisplayedSearchInput() {
+        return searchInput.isDisplayed();
+    }
+
+    public boolean isEnabledSearchInput() {
+        return searchInput.isEnabled();
     }
 
     public String returnCurrUrl () {
         return webDriver.getCurrentUrl();
     }
+
+
 }
