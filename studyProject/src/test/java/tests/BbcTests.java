@@ -10,8 +10,8 @@ import org.testng.annotations.Test;
 
 public class BbcTests extends BaseTest {
 
-    private BbcPage bbcPage = new BbcPage();
     private WebDriver driver = Driver.getWebDriver();
+    private BbcPage bbcPage = new BbcPage(driver);
 
     @BeforeTest
     public void getUrl () {

@@ -23,4 +23,5 @@
             <package name="tests.*"/>
         </packages>
     </test>
+
 </suite>

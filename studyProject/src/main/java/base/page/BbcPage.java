@@ -11,8 +11,8 @@ public class BbcPage {
 
     private WebDriver webDriver;
 
-    public BbcPage () {
-        this.webDriver = Driver.getWebDriver();
+    public BbcPage (WebDriver driver) {
+        this.webDriver = driver;
         PageFactory.initElements(webDriver, this);
     }
 
@@ -46,6 +46,4 @@ public class BbcPage {
     public String returnCurrUrl () {
         return webDriver.getCurrentUrl();
     }
-
-
 }
