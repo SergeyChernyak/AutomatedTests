@@ -1,16 +1,13 @@
 package tests;
 
 import base.conf.BaseTest;
-import base.conf.Driver;
 import base.page.BbcPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class BbcTests extends BaseTest {
 
-    private WebDriver driver = Driver.getWebDriver();
     private BbcPage bbcPage = new BbcPage(driver);
 
     @BeforeTest
