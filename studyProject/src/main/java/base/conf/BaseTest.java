@@ -5,11 +5,11 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
-    protected WebDriver driver = Driver.getWebDriver();
+    protected WebDriver driver;
 
     @BeforeSuite
     protected void initDriver () {
-        Driver.getWebDriver();
+        driver = Driver.getWebDriver();
     }
 
     @AfterSuite
