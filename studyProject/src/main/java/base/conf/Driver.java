@@ -7,10 +7,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.Parameters;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
     private static WebDriver webDriver;
+    public static final int IMPLICIT_WAIT = 10;
 
     @Parameters("browser")
     private static WebDriver getDriver(String browser) {
@@ -31,6 +33,7 @@ public class Driver {
             }
         if (Objects.nonNull(webDriver)) {
             webDriver.manage().window().maximize();
+            webDriver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, TimeUnit.SECONDS);
             }
         }
         return webDriver;

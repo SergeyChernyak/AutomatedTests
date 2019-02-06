@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class BbcTests extends BaseTest {
 
-    private BbcPage bbcPage = new BbcPage(driver);
+    private BbcPage bbcPage = new BbcPage(driver, wait);
 
     @BeforeTest
     public void getUrl () {
