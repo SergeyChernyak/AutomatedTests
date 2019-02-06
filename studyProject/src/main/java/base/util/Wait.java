@@ -43,12 +43,17 @@ public class Wait {
         this.visibleWithWait(element, WAIT_TIME);
     }
 
-    public void visibleAndClicable (WebElement webElement, int waitTime) {
+    public void visibleAndClickableWithWait(WebElement webElement, int waitTime) {
         wait(ExpectedConditions.elementToBeClickable(webElement), waitTime);
     }
 
-    public void clickableThenClick (WebElement webElement) {
-        this.visibleAndClicable(webElement, WAIT_TIME);
+    public void clickableThenClickWithoutWait(WebElement webElement) {
+        this.visibleAndClickableWithWait(webElement, WAIT_TIME);
+    }
+
+    public void clickWhenVisibleAndClickable (WebElement webElement) {
+        this.visibleAndClickableWithWait(webElement, WAIT_TIME);
+        webElement.click();
     }
 
     void turnOffImplicitWaits() {

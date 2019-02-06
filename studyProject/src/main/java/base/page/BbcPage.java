@@ -27,7 +27,7 @@ public class BbcPage {
     private WebElement weatherButton;
 
     public BbcPage textEnter(String str) {
-        searchInput.click();
+        wait.clickWhenVisibleAndClickable(searchInput);
         searchInput.clear();
         searchInput.sendKeys(str);
         searchInput.sendKeys(Keys.ENTER);
@@ -35,10 +35,9 @@ public class BbcPage {
     }
 
     public BbcPage clickOnNavigationWeatherButton() {
-        weatherButton.click();
+        wait.clickWhenVisibleAndClickable(weatherButton);
         return this;
     }
-
 
     public boolean isDisplayedSearchInput() {
         wait.visibleWithoutWait(searchInput);
@@ -46,21 +45,9 @@ public class BbcPage {
     }
 
     public boolean isEnabledSearchInput() {
-        wait.clickableThenClick(searchInput);
-//        wait.visibleWithoutWait(searchInput);
+        wait.clickableThenClickWithoutWait(searchInput);
         return searchInput.isEnabled();
     }
-
-    /*
-    public boolean isDisplayedSearchInput() {
-        return searchInput.isDisplayed();
-    }
-
-    public boolean isEnabledSearchInput() {
-        return searchInput.isEnabled();
-    }
-    */
-
 
     public String returnCurrUrl () {
         return webDriver.getCurrentUrl();

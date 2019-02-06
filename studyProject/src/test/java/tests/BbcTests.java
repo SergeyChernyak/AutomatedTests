@@ -1,14 +1,11 @@
 package tests;
 
 import base.conf.BaseTest;
-import base.page.BbcPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class BbcTests extends BaseTest {
-
-    private BbcPage bbcPage = new BbcPage(driver, wait);
 
     @BeforeTest
     public void getUrl () {
