@@ -1,15 +1,14 @@
 package base.page;
 
+import base.conf.BasePage;
 import base.util.Wait;
-import base.conf.Driver;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class BbcPage {
+public class BbcPage extends BasePage {
 
     private WebDriver webDriver;
     private Wait wait;
@@ -17,7 +16,7 @@ public class BbcPage {
     public BbcPage (WebDriver driver, Wait wait) {
         this.webDriver = driver;
         this.wait = wait;
-        PageFactory.initElements(new AjaxElementLocatorFactory(webDriver, Driver.IMPLICIT_WAIT), this);
+        PageFactory.initElements(webDriver, this);
     }
 
     @FindBy(css = "#orb-search-q")
@@ -27,29 +26,29 @@ public class BbcPage {
     private WebElement weatherButton;
 
     public BbcPage textEnter(String str) {
-        wait.clickWhenVisibleAndClickable(searchInput);
+        myClickWithWait(searchInput);
         searchInput.clear();
-        searchInput.sendKeys(str);
+        mySendKeysWithWait(searchInput, str);
         searchInput.sendKeys(Keys.ENTER);
         return this;
     }
 
     public BbcPage clickOnNavigationWeatherButton() {
-        wait.clickWhenVisibleAndClickable(weatherButton);
+        myClickWithWait(weatherButton);
         return this;
     }
 
     public boolean isDisplayedSearchInput() {
-        wait.visibleWithoutWait(searchInput);
+        wait.visibleWithoutInputParamWait(searchInput);
         return searchInput.isDisplayed();
     }
 
     public boolean isEnabledSearchInput() {
-        wait.clickableThenClickWithoutWait(searchInput);
+        wait.clickableThenClickWithoutInputParamWait(searchInput);
         return searchInput.isEnabled();
     }
 
-    public String returnCurrUrl () {
+    public String returnCurrentUrl() {
         return webDriver.getCurrentUrl();
     }
 }

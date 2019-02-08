@@ -35,24 +35,24 @@ public class Wait {
         wait(ExpectedConditions.visibilityOf(webElement), waitTime);
     }
 
-    public void visibleWithWait(WebElement element, int waitTime) {
+    public void visibleWithInputParamWait(WebElement element, int waitTime) {
         this.visible(element, waitTime);
     }
 
-    public void visibleWithoutWait(WebElement element) {
-        this.visibleWithWait(element, WAIT_TIME);
+    public void visibleWithoutInputParamWait(WebElement element) {
+        this.visibleWithInputParamWait(element, WAIT_TIME);
     }
 
-    public void visibleAndClickableWithWait(WebElement webElement, int waitTime) {
+    public void visibleAndClickableWithInputParamWait(WebElement webElement, int waitTime) {
         wait(ExpectedConditions.elementToBeClickable(webElement), waitTime);
     }
 
-    public void clickableThenClickWithoutWait(WebElement webElement) {
-        this.visibleAndClickableWithWait(webElement, WAIT_TIME);
+    public void clickableThenClickWithoutInputParamWait(WebElement webElement) {
+        this.visibleAndClickableWithInputParamWait(webElement, WAIT_TIME);
     }
 
     public void clickWhenVisibleAndClickable (WebElement webElement) {
-        this.visibleAndClickableWithWait(webElement, WAIT_TIME);
+        this.visibleAndClickableWithInputParamWait(webElement, WAIT_TIME);
         webElement.click();
     }
 

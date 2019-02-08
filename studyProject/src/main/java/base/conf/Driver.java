@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class Driver {
 
     private static WebDriver webDriver;
-    public static final int IMPLICIT_WAIT = 10;
+    private static final int IMPLICIT_WAIT = 5;
 
     @Parameters("browser")
     private static WebDriver getDriver(String browser) {
