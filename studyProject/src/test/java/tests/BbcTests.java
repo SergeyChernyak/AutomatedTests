@@ -8,18 +8,19 @@ import org.testng.annotations.Test;
 
 public class BbcTests extends BaseTest {
 
-    private BbcPage bbcPage = new BbcPage(driver);
+    private BbcPage bbcPage;
 
     @BeforeTest
     public void getUrl () {
         driver.get("https://www.bbc.com/");
+        bbcPage = new BbcPage(driver, wait);
     }
 
     @Test (priority = 0)
     public void checkSearchInputTest() {
         bbcPage
                 .textEnter("TEST");
-        Assert.assertEquals("https://www.bbc.co.uk/search?q=TEST", bbcPage.returnCurrUrl());
+        Assert.assertEquals("https://www.bbc.co.uk/search?q=TEST", bbcPage.returnCurrentUrl());
     }
 
     @Test (priority = 1)
@@ -36,6 +37,6 @@ public class BbcTests extends BaseTest {
     public void checkNavigationButtonTest() {
         bbcPage
             .clickOnNavigationWeatherButton();
-        Assert.assertEquals("https://www.bbc.com/weather", bbcPage.returnCurrUrl());
+        Assert.assertEquals("https://www.bbc.com/weather", bbcPage.returnCurrentUrl());
     }
 }
