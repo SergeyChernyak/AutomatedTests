@@ -12,12 +12,13 @@ public class YandexTest extends BaseTest {
 
     @BeforeTest
     public void getUrl () {
-        driver.get("https://yandex.by/");
+        driver.get("https://yandex.ru");
         yandexMainPage = new YandexMainPage(driver, wait);
     }
 
     @Test
     public void compareContentsOfTheDropdownList () {
-        Assert.assertTrue(true);
+        Assert.assertEquals(yandexMainPage.saveToListNameOfLinksLondon(), yandexMainPage.saveToListNameOfLinksParis(),
+                "Lists of element not identical");
     }
 }
