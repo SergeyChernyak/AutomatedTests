@@ -7,12 +7,12 @@ public class BasePage {
 
     private Wait wait = new Wait(Driver.getWebDriver());
 
-    protected void mySendKeysWithWait (WebElement webElement, String string) {
+    protected void customSendKeysWithWait(WebElement webElement, String string) {
         wait.visibleWithoutInputParamWait(webElement);
         webElement.sendKeys(string);
     }
 
-    protected void myClickWithWait (WebElement webElement) {
+    protected void customClickWithWait(WebElement webElement) {
         wait.clickWhenVisibleAndClickable(webElement);
     }
 }

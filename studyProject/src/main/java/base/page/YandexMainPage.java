@@ -15,8 +15,6 @@ public class YandexMainPage extends BasePage {
 
     private WebDriver webDriver;
     private Wait wait;
-    public List<String> valuesLondon = new ArrayList<>();
-    public List<String> valuesParis = new ArrayList<>();
 
     public YandexMainPage (WebDriver driver, Wait wait) {
         this.webDriver = driver;
@@ -36,40 +34,23 @@ public class YandexMainPage extends BasePage {
     @FindBy(css = ".checkbox__control")
     private WebElement findCityCheckBox;
 
+    private By allElementsFromMoreDropDown = By.cssSelector(".home-tabs__more>div>div>a[href]");
 
-    public YandexMainPage changeLocationToLondon () {
-        myClickWithWait(destinationButton);
+    public void changeLocation (String city) {
+        customClickWithWait(destinationButton);
         findCityCheckBox.click();
         citySearchInput.clear();
-        citySearchInput.sendKeys("Лондон");
+        customSendKeysWithWait(citySearchInput, city);
         citySearchInput.submit();
-        return this;
     }
 
-    public YandexMainPage saveToListNameOfLinksLondon() {
-        myClickWithWait(moreDropDownButton);
-        By mySelectorLondon = By.cssSelector(".home-tabs__more>div>div>a[href]");
-        List<WebElement> elementsLondon = webDriver.findElements(mySelectorLondon);
-        for (WebElement e : elementsLondon)
-            valuesLondon.add(e.getText());
-        return this;
+    public List getList() {
+        List<String> valuesOfSomeCity = new ArrayList<>();
+        customClickWithWait(moreDropDownButton);
+        List<WebElement> elementsOfSomeCity = webDriver.findElements(allElementsFromMoreDropDown);
+        for (WebElement e : elementsOfSomeCity)
+            valuesOfSomeCity.add(e.getText());
+        return valuesOfSomeCity;
     }
 
-    public YandexMainPage changeLocationToParis () {
-        myClickWithWait(destinationButton);
-        findCityCheckBox.click();
-        citySearchInput.clear();
-        citySearchInput.sendKeys("Париж");
-        citySearchInput.submit();
-        return this;
-    }
-
-    public YandexMainPage saveToListNameOfLinksParis () {
-        myClickWithWait(moreDropDownButton);
-        By mySelectorParis = By.cssSelector(".home-tabs__more>div>div>a[href]");
-        List<WebElement> elementsParis = webDriver.findElements(mySelectorParis);
-        for (WebElement e : elementsParis)
-            valuesParis.add(e.getText());
-        return this;
-    }
 }

@@ -6,11 +6,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class YandexTest extends BaseTest {
 
     private YandexMainPage yandexMainPage;
+    private List listOfLondon = new ArrayList<>();
+    private List listOfParis = new ArrayList<>();
 
     @BeforeTest
     public void getUrl () {
@@ -20,12 +23,10 @@ public class YandexTest extends BaseTest {
 
     @Test
     public void compareContentsOfTheMoreDropdownList() {
-        yandexMainPage.changeLocationToLondon();
-        yandexMainPage.saveToListNameOfLinksLondon();
-        yandexMainPage.changeLocationToParis();
-        yandexMainPage.saveToListNameOfLinksParis();
-        Assert.assertEquals(Arrays.toString(yandexMainPage.valuesLondon.toArray()),
-                Arrays.toString(yandexMainPage.valuesParis.toArray()),
-                "Lists of element not identical");
+        yandexMainPage.changeLocation("Лондон");
+        listOfLondon = yandexMainPage.getList();
+        yandexMainPage.changeLocation("Париж");
+        listOfParis = yandexMainPage.getList();
+        Assert.assertEquals(listOfLondon, listOfParis, "Lists of element not identical");
     }
 }
