@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 public class YandexTest extends BaseTest {
 
     private YandexMainPage yandexMainPage;
@@ -17,8 +19,13 @@ public class YandexTest extends BaseTest {
     }
 
     @Test
-    public void compareContentsOfTheDropdownList () {
-        Assert.assertEquals(yandexMainPage.saveToListNameOfLinksLondon(), yandexMainPage.saveToListNameOfLinksParis(),
+    public void compareContentsOfTheMoreDropdownList() {
+        yandexMainPage.changeLocationToLondon();
+        yandexMainPage.saveToListNameOfLinksLondon();
+        yandexMainPage.changeLocationToParis();
+        yandexMainPage.saveToListNameOfLinksParis();
+        Assert.assertEquals(Arrays.toString(yandexMainPage.valuesLondon.toArray()),
+                Arrays.toString(yandexMainPage.valuesParis.toArray()),
                 "Lists of element not identical");
     }
 }

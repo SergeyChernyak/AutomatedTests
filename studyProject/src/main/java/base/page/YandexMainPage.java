@@ -15,6 +15,8 @@ public class YandexMainPage extends BasePage {
 
     private WebDriver webDriver;
     private Wait wait;
+    public List<String> valuesLondon = new ArrayList<>();
+    public List<String> valuesParis = new ArrayList<>();
 
     public YandexMainPage (WebDriver driver, Wait wait) {
         this.webDriver = driver;
@@ -34,35 +36,40 @@ public class YandexMainPage extends BasePage {
     @FindBy(css = ".checkbox__control")
     private WebElement findCityCheckBox;
 
-    public List saveToListNameOfLinksLondon() {
+
+    public YandexMainPage changeLocationToLondon () {
         myClickWithWait(destinationButton);
         findCityCheckBox.click();
         citySearchInput.clear();
         citySearchInput.sendKeys("Лондон");
         citySearchInput.submit();
-        myClickWithWait(moreDropDownButton);
-
-        By mySelectorLondon = By.cssSelector(".home-tabs__more>div>div>a[href]");
-        List<WebElement> elementsLondon = webDriver.findElements(mySelectorLondon);
-        List<String> valuesLondon = new ArrayList<>();
-        for (WebElement e : elementsLondon)
-            valuesLondon.add(e.getText());
-        return valuesLondon;
+        return this;
     }
 
-    public List saveToListNameOfLinksParis () {
+    public YandexMainPage saveToListNameOfLinksLondon() {
+        myClickWithWait(moreDropDownButton);
+        By mySelectorLondon = By.cssSelector(".home-tabs__more>div>div>a[href]");
+        List<WebElement> elementsLondon = webDriver.findElements(mySelectorLondon);
+        for (WebElement e : elementsLondon)
+            valuesLondon.add(e.getText());
+        return this;
+    }
+
+    public YandexMainPage changeLocationToParis () {
         myClickWithWait(destinationButton);
         findCityCheckBox.click();
         citySearchInput.clear();
         citySearchInput.sendKeys("Париж");
         citySearchInput.submit();
-        myClickWithWait(moreDropDownButton);
+        return this;
+    }
 
+    public YandexMainPage saveToListNameOfLinksParis () {
+        myClickWithWait(moreDropDownButton);
         By mySelectorParis = By.cssSelector(".home-tabs__more>div>div>a[href]");
         List<WebElement> elementsParis = webDriver.findElements(mySelectorParis);
-        List<String> valuesParis = new ArrayList<>();
         for (WebElement e : elementsParis)
             valuesParis.add(e.getText());
-        return valuesParis;
+        return this;
     }
 }
