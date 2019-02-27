@@ -31,6 +31,10 @@ public class Wait {
                 .until(condition);
     }
 
+    public void isPresentAlert() {
+        wait(ExpectedConditions.alertIsPresent(), WAIT_TIME);
+    }
+
     public void visible(WebElement webElement, int waitTime) {
         wait(ExpectedConditions.visibilityOf(webElement), waitTime);
     }
