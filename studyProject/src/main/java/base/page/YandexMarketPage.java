@@ -66,12 +66,12 @@ public class YandexMarketPage extends BasePage {
     public void changeTheDisplayNumberOfItems () {
         customMoveToElementAndClick(showFromDropDown);
         showOf12Button.click();
+        wait.isPresentAlert();
+        webDriver.switchTo().alert().accept();
     }
 
     public String countOfElementVisibleOfPage () {
         wait.visibleWithoutInputParamWait(countElementsOfDispayedOnPage);
-//        wait.isPresentAlert();
-//        webDriver.switchTo().alert().accept();
         customMoveToElement(countElementsOfDispayedOnPage);
         return countElementsOfDispayedOnPage.getText();
     }

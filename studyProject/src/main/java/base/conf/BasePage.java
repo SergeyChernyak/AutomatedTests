@@ -11,6 +11,7 @@ public class BasePage {
 
     protected void customSendKeysWithWait(WebElement webElement, String string) {
         wait.visibleWithoutInputParamWait(webElement);
+        webElement.clear();
         webElement.sendKeys(string);
     }
 
