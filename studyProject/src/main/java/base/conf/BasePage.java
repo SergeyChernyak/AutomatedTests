@@ -9,22 +9,22 @@ public class BasePage {
     private Wait wait = new Wait(Driver.getWebDriver());
     private Actions actions = new Actions(Driver.getWebDriver());
 
-    protected void customSendKeysWithWait(WebElement webElement, String string) {
+    protected void sendKeysWithWait(WebElement webElement, String string) {
         wait.visibleWithoutInputParamWait(webElement);
         webElement.clear();
         webElement.sendKeys(string);
     }
 
-    protected void customClickWithWait(WebElement webElement) {
+    protected void clickWithWait(WebElement webElement) {
         wait.clickWhenVisibleAndClickable(webElement);
     }
 
-    protected void customMoveToElement (WebElement webElement) {
+    protected void moveToElement(WebElement webElement) {
         actions.moveToElement(webElement).perform();
     }
 
-    protected void customMoveToElementAndClick (WebElement webElement) {
-        actions.moveToElement(webElement).perform();
+    protected void moveToElementAndClick(WebElement webElement) {
+        moveToElement(webElement);
         webElement.click();
     }
 }
