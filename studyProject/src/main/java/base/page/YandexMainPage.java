@@ -37,16 +37,16 @@ public class YandexMainPage extends BasePage {
     private By allElementsFromMoreDropDown = By.cssSelector(".home-tabs__more>div>div>a[href]");
 
     public void changeLocation (String city) {
-        customClickWithWait(destinationButton);
+        clickWithWait(destinationButton);
         findCityCheckBox.click();
         citySearchInput.clear();
-        customSendKeysWithWait(citySearchInput, city);
+        sendKeysWithWait(citySearchInput, city);
         citySearchInput.submit();
     }
 
     public List getList() {
         List<String> valuesOfSomeCity = new ArrayList<>();
-        customClickWithWait(moreDropDownButton);
+        clickWithWait(moreDropDownButton);
         List<WebElement> elementsOfSomeCity = webDriver.findElements(allElementsFromMoreDropDown);
         for (WebElement e : elementsOfSomeCity)
             valuesOfSomeCity.add(e.getText());
