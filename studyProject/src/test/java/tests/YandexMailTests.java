@@ -1,96 +1,110 @@
 package tests;
 
 import base.conf.BaseTest;
-import base.page.YandexMail;
+import base.page.YandexMailPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class YandexMailTests extends BaseTest {
 
-    private YandexMail yandexMail;
+    private YandexMailPage yandexMailPage;
 
     @BeforeTest
     public void getUrl () {
         driver.get("https://yandex.by/");
-        yandexMail = new YandexMail(driver, wait);
+        yandexMailPage = new YandexMailPage(driver, wait);
     }
 
-    @Test(priority = 0)
+    @Test()
     public void checkLoginToMailTest () {
-        yandexMail.clickToEnterMail();
-        yandexMail.enterLogin("AutotestUser");
-        yandexMail.enterPassword("AutotestUser123");
-        yandexMail.loginToMail();
-        Assert.assertEquals(yandexMail.getNameOfUser(), "AutotestUser", "Not correct user");
+        yandexMailPage.clickToEnterMail();
+        yandexMailPage.enterLogin("AutotestUser");
+        yandexMailPage.enterPassword("AutotestUser123");
+        yandexMailPage.loginToMail();
+        Assert.assertEquals(yandexMailPage.getNameOfUser(), "AutotestUser", "Not correct user");
     }
 
     @Test(priority = 1)
     public void checkLogoutFromMailTest () {
-        yandexMail.logoutFromMail();
-        Assert.assertTrue(yandexMail.getStatusEnterMailButton(), "Not logout user");
+        yandexMailPage.logoutFromMail();
+        Assert.assertTrue(yandexMailPage.getStatusEnterMailButton(), "Not logout user");
     }
 
     @Test(priority = 2)
     public void checkErrorInvalidPasswordTest () {
-        yandexMail.clickToEnterMail();
-        yandexMail.backToEnterLoginForm();
-        yandexMail.enterLogin("AutotestUser");
-        yandexMail.enterPassword("NoAutotestUser123");
-        yandexMail.loginToMail();
-        Assert.assertEquals(yandexMail.getErrorLoginMessage(), "Неверный пароль", "Not correct error message");
+        yandexMailPage.clickToEnterMail();
+        yandexMailPage.backToEnterLoginForm();
+        yandexMailPage.enterLogin("AutotestUser");
+        yandexMailPage.enterPassword("NoAutotestUser123");
+        yandexMailPage.loginToMail();
+        Assert.assertEquals(yandexMailPage.getErrorLoginMessage(), "Неверный пароль", "Not correct error message");
     }
 
     @Test(priority = 3)
     public void checkErrorInvalidLoginTest () {
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.clickToEnterMail();
-        yandexMail.backToEnterLoginForm();
-        yandexMail.enterLogin("NoAutotestUser");
-        Assert.assertEquals(yandexMail.getErrorLoginMessage(), "Такого аккаунта нет", "Not correct error message");
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.clickToEnterMail();
+        yandexMailPage.backToEnterLoginForm();
+        yandexMailPage.enterLogin("NoAutotestUser");
+        Assert.assertEquals(yandexMailPage.getErrorLoginMessage(), "Такого аккаунта нет", "Not correct error message");
     }
 
     @Test(priority = 4)
     public void checkClickForNavigationButtonTest () {
-        yandexMail.backToMainPage("https://yandex.by/");
+        yandexMailPage.backToMainPage("https://yandex.by/");
 
-        yandexMail.clickToNavigationLink("Видео");
-        Assert.assertEquals(yandexMail.getCurrentIndexUrl(1), "https://yandex.by/video/", "Not found page");
+        yandexMailPage.clickToNavigationLink("Видео");
+        Assert.assertEquals(yandexMailPage.getCurrentIndexUrl(1), "https://yandex.by/video/", "Not found page");
+        Assert.assertEquals(yandexMailPage.getResponseCode(yandexMailPage.getCurrentUrl()), 200,
+                "Response code not 200");
 
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.clickToNavigationLink("Картинки");
-        Assert.assertEquals(yandexMail.getCurrentUrl(), "https://yandex.by/images/", "Not found page");
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.clickToNavigationLink("Картинки");
+        Assert.assertEquals(yandexMailPage.getCurrentUrl(), "https://yandex.by/images/", "Not found page");
+        Assert.assertEquals(yandexMailPage.getResponseCode(yandexMailPage.getCurrentUrl()), 200,
+                "Response code not 200");
 
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.clickToNavigationLink("Новости");
-        Assert.assertEquals(yandexMail.getCurrentUrl(), "https://news.yandex.by/", "Not found page");
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.clickToNavigationLink("Новости");
+        Assert.assertEquals(yandexMailPage.getCurrentUrl(), "https://news.yandex.by/", "Not found page");
+        Assert.assertEquals(yandexMailPage.getResponseCode(yandexMailPage.getCurrentUrl()), 200,
+                "Response code not 200");
 
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.clickToNavigationLink("Карты");
-        Assert.assertEquals(yandexMail.getCurrentUrl(), "https://yandex.by/maps/10275/polotsk/?ll=28.768349%2C55.485576&z=13",
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.clickToNavigationLink("Карты");
+        Assert.assertEquals(yandexMailPage.getTitleCurrentUlr(), "Яндекс.Карты — подробная карта Беларуси и мира",
                 "Not found page");
+        Assert.assertEquals(yandexMailPage.getResponseCode(yandexMailPage.getCurrentUrl()), 200,
+                "Response code not 200");
 
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.clickToNavigationLink("Маркет");
-        Assert.assertEquals(yandexMail.getCurrentUrl(),
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.clickToNavigationLink("Маркет");
+        Assert.assertEquals(yandexMailPage.getCurrentUrl(),
                 "https://market.yandex.by/?clid=505&utm_source=face_abovesearch&utm_campaign=face_abovesearch",
                 "Not found page");
+        Assert.assertEquals(yandexMailPage.getResponseCode(yandexMailPage.getCurrentUrl()), 200,
+                "Response code not 200");
 
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.clickToNavigationLink("Переводчик");
-        Assert.assertEquals(yandexMail.getCurrentUrl(), "https://translate.yandex.by/", "Not found page");
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.clickToNavigationLink("Переводчик");
+        Assert.assertEquals(yandexMailPage.getCurrentUrl(), "https://translate.yandex.by/", "Not found page");
+        Assert.assertEquals(yandexMailPage.getResponseCode(yandexMailPage.getCurrentUrl()), 200,
+                "Response code not 200");
 
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.clickToNavigationLink("Музыка");
-        Assert.assertEquals(yandexMail.getCurrentUrl(), "https://music.yandex.by/home", "Not found page");
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.clickToNavigationLink("Музыка");
+        Assert.assertEquals(yandexMailPage.getCurrentUrl(), "https://music.yandex.by/home", "Not found page");
+        Assert.assertEquals(yandexMailPage.getResponseCode(yandexMailPage.getCurrentUrl()), 200,
+                "Response code not 200");
     }
 
     @Test(priority = 5)
     public void checkSwitchLanguageToEnglishTest () {
-        yandexMail.backToMainPage("https://yandex.by/");
-        yandexMail.openDropDownWithLanguages();
-        yandexMail.chooseEnglishLanguage();
-        yandexMail.saveLanguage();
-        Assert.assertEquals(yandexMail.getCurrentLanguage(), "English", "Not English");
+        yandexMailPage.backToMainPage("https://yandex.by/");
+        yandexMailPage.openDropDownWithLanguages();
+        yandexMailPage.chooseEnglishLanguage();
+        yandexMailPage.saveLanguage();
+        Assert.assertEquals(yandexMailPage.getCurrentLanguage(), "English", "Not English");
     }
 }

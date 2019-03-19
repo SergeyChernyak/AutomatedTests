@@ -9,14 +9,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
-public class YandexMail extends BasePage {
+public class YandexMailPage extends BasePage {
 
     private WebDriver webDriver;
     private Wait wait;
 
-    public YandexMail(WebDriver driver, Wait wait) {
+    public YandexMailPage(WebDriver driver, Wait wait) {
         this.webDriver = driver;
         this.wait = wait;
         PageFactory.initElements(webDriver,this);
@@ -181,6 +183,27 @@ public class YandexMail extends BasePage {
 
     public String getCurrentUrl () {
         return webDriver.getCurrentUrl();
+    }
+
+    public int getResponseCode(String link) {
+        URL url;
+        HttpURLConnection con = null;
+        int responsecode = 0;
+        try {
+            url = new URL(link);
+            con = (HttpURLConnection) url.openConnection();
+            responsecode = con.getResponseCode();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != con)
+                con.disconnect();
+        }
+        return responsecode;
+    }
+
+    public String getTitleCurrentUlr () {
+        return webDriver.getTitle();
     }
 
     public void openDropDownWithLanguages () {
