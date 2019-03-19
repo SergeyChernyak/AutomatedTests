@@ -63,8 +63,7 @@ public class YandexMarketPage extends BasePage {
     private WebElement preLoader;
 
     private By priceOfAllProduct = By.cssSelector(".n-snippet-cell2__price div[class='price']");
-    private By countProduct = By.cssSelector("n-snippet-cell2_type_product");
-
+    private By countProduct = By.cssSelector(".n-snippet-cell2_type_product");
 
     public void chooseCheckBoxManufacturer () {
         moveToElement(appleLabelCheckBox);
@@ -100,19 +99,13 @@ public class YandexMarketPage extends BasePage {
     }
 
     public Integer getCountProductOnPage () {
-
-//        wait.visibleBy(countProduct,20);
-//        wait.notVisibleWithoutInputParamWait(preLoader);
-//        wait.waitForJSandJQueryToLoad();
-
-        wait.waitForAjaxToFinish();
-        wait.waitForJQueryToBeActive();
-//        wait.waitForJSandJQueryToLoad();
-
-        // вот тут висит ajax!
-
-        int countOfProduct = webDriver.findElements(countProduct).size();
-        return countOfProduct;
+        wait.sleep(3);
+        webDriver.navigate().refresh();
+        List<WebElement> products = webDriver.findElements(countProduct);
+        for (WebElement e : products) {
+            e.getAttribute("data-id");
+        }
+        return products.size();
     }
 
     public void chooseDeliveryMethod() {
@@ -135,6 +128,8 @@ public class YandexMarketPage extends BasePage {
 
     public void sortByPrice() {
         byPriceSortButton.click();
+        wait.sleep(3);
+        webDriver.navigate().refresh();
     }
 
     public double[] getAllPriceOfProduct () {
@@ -142,7 +137,8 @@ public class YandexMarketPage extends BasePage {
         List<WebElement> prices = webDriver.findElements(priceOfAllProduct);
         for (WebElement e : prices) {
             String temp = e.getText();
-            String strWithoutChars = temp.replace(" б.p.", "");
+            String strWithoutChars0 = temp.replace("от ", "");
+            String strWithoutChars = strWithoutChars0.replace(" б.p.", "");
             String strInFormatDouble = strWithoutChars.replace(",", ".");
             String strPrice = strInFormatDouble.replace(" ", "");
             pricesAllProduct.add(strPrice);
