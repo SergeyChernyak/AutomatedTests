@@ -27,7 +27,8 @@ public class YandexMarketTests extends BaseTest {
         yandexMarketPage.changeTheDisplayNumberOfItems(12);
         Assert.assertEquals(yandexMarketPage.countOfElementVisibleOfPage(),"Показывать по 12",
                 "Displayed not 12 element");
-        Assert.assertEquals(yandexMarketPage.getCountProductOnPage(), java.util.Optional.of(12),
+        Assert.assertEquals(java.util.Optional.ofNullable(yandexMarketPage.getCountProductOnPage()),
+                java.util.Optional.of(12),
                 "Not same count elements");
     }
 
@@ -47,12 +48,16 @@ public class YandexMarketTests extends BaseTest {
     public void checkClassSortPriceButtonTest() {
         yandexMarketPage.sortByPrice();
         Assert.assertTrue(yandexMarketPage.getClassSortByPrice().contains("asc"), "Not ASC");
-        Assert.assertEquals(yandexMarketPage.numberOfReplacementsSortAsc(yandexMarketPage.getAllPriceOfProduct()), java.util.Optional.of(0),
+        Assert.assertEquals(java.util.Optional.ofNullable(yandexMarketPage.numberOfReplacementsSortAsc(
+                yandexMarketPage.getAllPriceOfProduct())),
+                java.util.Optional.of(0),
                 "Not sorted by ASC");
 
         yandexMarketPage.sortByPrice();
         Assert.assertTrue(yandexMarketPage.getClassSortByPrice().contains("desc"), "Not DESC");
-        Assert.assertEquals(yandexMarketPage.numberOfReplacementsSortDesc(yandexMarketPage.getAllPriceOfProduct()), java.util.Optional.of(0),
+        Assert.assertEquals(java.util.Optional.ofNullable(yandexMarketPage.numberOfReplacementsSortDesc(
+                yandexMarketPage.getAllPriceOfProduct())),
+                java.util.Optional.of(0),
                 "Not sorted by DESC");
     }
 
