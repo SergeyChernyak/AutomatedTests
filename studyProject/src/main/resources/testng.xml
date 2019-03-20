@@ -4,10 +4,10 @@
 <suite name="Bbc and Yandex">
     <test name="ChromeTest">
         <classes>
-            <class name="tests.BbcTests" />
+            <!--<class name="tests.BbcTests" />-->
             <!--<class name="tests.YandexTest" />-->
             <!--<class name="tests.YandexMarketTests" />-->
-            <!--<class name="tests.YandexMailTests" />-->
+            <class name="tests.YandexMailTests" />
         </classes>
     </test>
 </suite>

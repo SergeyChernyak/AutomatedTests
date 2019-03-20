@@ -2,7 +2,7 @@ package base.page;
 
 import base.conf.BasePage;
 import base.util.Wait;
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -99,7 +99,32 @@ public class YandexMailPage extends BasePage {
     @FindBy(css = ".option__content .button_js_inited>span")
     private WebElement nameCurrentLanguageText;
 
-    private By englishLanguageByLink = By.cssSelector("a[aria-label='En']");
+    @FindBy(css = ".popular>.related-serp__title")
+    private WebElement nameTitleVideoPageText;
+
+    @FindBy(css = ".collections-menu>.collections-menu__menu-item_cur")
+    private WebElement myTapeLinkImagesPage;
+
+    @FindBy(css = ".logo_name_news-ru-77x26")
+    private WebElement newsLogoNewsPage;
+
+    @FindBy(css = ".header .input_air-search-large__control")
+    private WebElement searchInputMapsPage;
+
+    @FindBy(css = ".logo_part_market")
+    private WebElement marketLogoMarketPage;
+
+    @FindBy(css = ".name")
+    private WebElement traslateLogoTranslatePage;
+
+    @FindBy(css = ".head .d-logo__ya-sub")
+    private WebElement musicLogoMusicPage;
+
+    @FindBy(css = ".passp-account-list-item__remove-button")
+    private WebElement deleteFromListAccountButton;
+
+    @FindBy(css = ".passp-account-list-item-block>a")
+    private WebElement userAccountBlock;
 
     public void clickToEnterMail () {
         clickWithWait(eneterMailButton);
@@ -114,9 +139,18 @@ public class YandexMailPage extends BasePage {
         sendKeysWithWait(passwordField, password);
     }
 
-    public void backToEnterLoginForm () {
+    private void clickOnInvisibleElement(WebElement element) {
+        String script = "var object = arguments[0];"
+                + "var theEvent = document.createEvent(\"MouseEvent\");"
+                + "theEvent.initMouseEvent(\"click\", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);"
+                + "object.dispatchEvent(theEvent);"
+                ;
+        ((JavascriptExecutor)webDriver).executeScript(script, element);
+    }
+
+    public void deleteLogoutAccountFromList () {
         clickWithWait(backButton);
-        clickWithWait(anotherAccountLink);
+        clickOnInvisibleElement(deleteFromListAccountButton);
     }
 
     public void loginToMail() {
@@ -175,6 +209,34 @@ public class YandexMailPage extends BasePage {
         }
     }
 
+    public boolean getStatusOfElementOnVideoPage () {
+        return nameTitleVideoPageText.isDisplayed();
+    }
+
+    public boolean getStatusOfElementOnImagesPage () {
+        return myTapeLinkImagesPage.isDisplayed();
+    }
+
+    public boolean getStatusOfElementOnNewsPage () {
+        return newsLogoNewsPage.isDisplayed();
+    }
+
+    public String getStatusOfElementOnMapsPage () {
+        return searchInputMapsPage.getAttribute("placeholder");
+    }
+
+    public boolean getStatusOfElementOnMarketPage () {
+        return marketLogoMarketPage.isDisplayed();
+    }
+
+    public boolean getStatusOfElementOnTranslatePage () {
+        return traslateLogoTranslatePage.isDisplayed();
+    }
+
+    public boolean getStatusOfElementOnMusicPage () {
+        return musicLogoMusicPage.isDisplayed();
+    }
+
     public String getCurrentIndexUrl(Integer index) {
         ArrayList<String> tabs2 = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs2.get(index));
@@ -210,9 +272,9 @@ public class YandexMailPage extends BasePage {
         clickWithWait(languageButton);
     }
 
-    private boolean existsElement(By selector) {
+    private boolean existsElement (WebElement webElement) {
         try {
-            webDriver.findElement(selector);
+            webElement.isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
@@ -220,7 +282,7 @@ public class YandexMailPage extends BasePage {
     }
 
     public void chooseEnglishLanguage () {
-        if (existsElement(englishLanguageByLink))
+        if (existsElement(englishLanguageLink))
             clickWithWait(englishLanguageLink);
         else {
             clickWithWait(moreButton);
