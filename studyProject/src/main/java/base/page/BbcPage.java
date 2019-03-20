@@ -26,15 +26,15 @@ public class BbcPage extends BasePage {
     private WebElement weatherButton;
 
     public BbcPage textEnter(String str) {
-        customClickWithWait(searchInput);
+        clickWithWait(searchInput);
         searchInput.clear();
-        customSendKeysWithWait(searchInput, str);
+        sendKeysWithWait(searchInput, str);
         searchInput.sendKeys(Keys.ENTER);
         return this;
     }
 
     public BbcPage clickOnNavigationWeatherButton() {
-        customClickWithWait(weatherButton);
+        clickWithWait(weatherButton);
         return this;
     }
 
