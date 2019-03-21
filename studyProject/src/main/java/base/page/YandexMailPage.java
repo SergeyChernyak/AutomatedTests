@@ -209,31 +209,31 @@ public class YandexMailPage extends BasePage {
         }
     }
 
-    public boolean getStatusOfElementOnVideoPage () {
+    public boolean getVisibilityOfElementOnVideoPage() {
         return nameTitleVideoPageText.isDisplayed();
     }
 
-    public boolean getStatusOfElementOnImagesPage () {
+    public boolean getVisibilityOfElementOnImagesPage() {
         return myTapeLinkImagesPage.isDisplayed();
     }
 
-    public boolean getStatusOfElementOnNewsPage () {
+    public boolean getVisibilityOfElementOnNewsPage() {
         return newsLogoNewsPage.isDisplayed();
     }
 
-    public String getStatusOfElementOnMapsPage () {
+    public String getPlaceholderOfElementOnMapsPage() {
         return searchInputMapsPage.getAttribute("placeholder");
     }
 
-    public boolean getStatusOfElementOnMarketPage () {
+    public boolean getVisibilityOfElementOnMarketPage() {
         return marketLogoMarketPage.isDisplayed();
     }
 
-    public boolean getStatusOfElementOnTranslatePage () {
+    public boolean getVisibilityOfElementOnTranslatePage() {
         return traslateLogoTranslatePage.isDisplayed();
     }
 
-    public boolean getStatusOfElementOnMusicPage () {
+    public boolean getVisibilityOfElementOnMusicPage() {
         return musicLogoMusicPage.isDisplayed();
     }
 
