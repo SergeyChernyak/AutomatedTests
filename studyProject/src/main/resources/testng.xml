@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Bbc and Yandex">
+    <test name="ChromeTest">
+        <classes>
+            <!--<class name="tests.BbcTests" />-->
+            <!--<class name="tests.YandexTest" />-->
+            <!--<class name="tests.YandexMarketTests" />-->
+            <class name="tests.YandexMailTests" />
+        </classes>
+    </test>
+</suite>
