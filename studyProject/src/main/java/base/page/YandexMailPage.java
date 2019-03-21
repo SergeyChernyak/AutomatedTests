@@ -48,7 +48,7 @@ public class YandexMailPage extends BasePage {
     @FindBy(css = ".mail-User-Avatar_header")
     private WebElement userAvatarHeader;
 
-    @FindBy(css = "a[data-metric='Выйти из сервисов Яндекса']")
+    @FindBy(css = ".b-user-dropdown-content>div:nth-child(7)>a")
     private WebElement logoutButton;
 
     @FindBy(css = ".passp-form-field__error")
@@ -131,8 +131,13 @@ public class YandexMailPage extends BasePage {
     }
 
     public void enterLogin (String login) {
-        sendKeysWithWait(loginField, login);
-        clickWithWait(enterButton);
+        sendKeysAction(loginField, login);
+        clickActon(enterButton);
+    }
+
+    public void enterLoginJs (String login) {
+        sendKeysJS(loginField, login);
+        clickJS(enterButton);
     }
 
     public void enterPassword (String password) {
