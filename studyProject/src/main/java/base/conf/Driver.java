@@ -2,8 +2,10 @@ package base.conf;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Parameters;
 
 import java.util.Objects;
@@ -13,6 +15,7 @@ public class Driver {
 
     private static WebDriver webDriver;
     private static final int IMPLICIT_WAIT = 5;
+    private static ChromeOptions chromeOptions = new ChromeOptions();
 
     @Parameters("browser")
     private static WebDriver getDriver(String browser) {
@@ -20,7 +23,10 @@ public class Driver {
             switch (browser) {
                 case "chrome":
                     System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
-                    webDriver = new ChromeDriver();
+                    chromeOptions.addArguments("disable-infobars");
+                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--user-data-dir=C:\\Users\\Andersen\\Desktop");
+                    webDriver = new ChromeDriver(chromeOptions);
                     break;
                 case "firefox":
                     System.setProperty("webdriver.gecko.driver", "./src/main/resources/drivers/geckodriver.exe");

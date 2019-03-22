@@ -33,7 +33,7 @@ public class YandexMailTests extends BaseTest {
     @Test
     public void checkLogoutFromMailTest () {
         yandexMailPage.clickToEnterMail();
-        yandexMailPage.enterLogin("AutotestUser");
+        yandexMailPage.enterLoginJs("AutotestUser");
         yandexMailPage.enterPassword("AutotestUser123");
         yandexMailPage.loginToMail();
         yandexMailPage.logoutFromMail();
