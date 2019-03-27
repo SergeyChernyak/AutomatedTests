@@ -64,7 +64,7 @@ public class YandexMarketMusicTests extends BaseTest {
     }
 
     @Test
-    public void checkChooseArtist () {
+    public void checkChooseArtistTest () {
         yandexMarketMusicPage.clickToEnterMail();
         yandexMarketMusicPage.enterLogin("AutotestUser");
         yandexMarketMusicPage.enterPassword("AutotestUser123");
@@ -81,7 +81,7 @@ public class YandexMarketMusicTests extends BaseTest {
                 "Not metallica band");
         Assert.assertEquals(yandexMarketMusicPage.countOfNotMetallica(),
                 0,
-                "Bans not Metallica in Popular albums");
+                "Bands not Metallica in Popular albums");
 
         yandexMarketMusicPage.logoutFromMusic();
         yandexMarketMusicPage.backToMainPage("https://yandex.by/");
@@ -107,13 +107,13 @@ public class YandexMarketMusicTests extends BaseTest {
                 "Track not playing");
 
         yandexMarketMusicPage.playPauseFirstMusic();
+        yandexMarketMusicPage.getCurrentTimeTrackAfterPause();
         wait.sleep(10);
         Assert.assertEquals(yandexMarketMusicPage.getCurrentPlayingTime(),
-                yandexMarketMusicPage.getCurrentPlayingTime(),
+                yandexMarketMusicPage.currentTimeTrack,
                 "Track not paused");
 
         yandexMarketMusicPage.logoutFromMusic();
         yandexMarketMusicPage.backToMainPage("https://yandex.by/");
-
     }
 }

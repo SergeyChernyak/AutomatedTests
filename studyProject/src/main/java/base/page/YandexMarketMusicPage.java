@@ -17,6 +17,7 @@ public class YandexMarketMusicPage extends BasePage {
     private Wait wait;
     private List<String> nameOfTwoElement = new ArrayList<>();
     private List<String> nameOfTwoElementCompare = new ArrayList<>();
+    public String currentTimeTrack;
 
     public YandexMarketMusicPage(WebDriver driver, Wait wait) {
         this.webDriver = driver;
@@ -350,5 +351,9 @@ public class YandexMarketMusicPage extends BasePage {
             return false;
         }
         return true;
+    }
+
+    public String getCurrentTimeTrackAfterPause () {
+        return currentTimeTrack = getCurrentPlayingTime();
     }
 }
