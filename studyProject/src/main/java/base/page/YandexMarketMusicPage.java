@@ -134,7 +134,7 @@ public class YandexMarketMusicPage extends BasePage {
         clickWithWait(marketNavigateLink);
     }
 
-    public void backToMainPage (String url) {
+    public void openPage(String url) {
         webDriver.get(url);
     }
 
@@ -152,29 +152,28 @@ public class YandexMarketMusicPage extends BasePage {
         ((JavascriptExecutor)webDriver).executeScript(script, element);
     }
 
-    public void addProductToCompare () {
+    public void addFirstTwoProductsToCompare() {
         clickOnInvisibleElement(addToCompareFirstProductDiv);
         clickOnInvisibleElement(addToCompareSecondProductDiv);
-        getTwoTitleOfProduct();
+        setTwoTitleOfProduct();
     }
 
     public void goToComparePage () {
         clickWithWait(compareButton);
-        getTwoTitleOfProductOnComparePage();
+        setTwoTitleOfProductOnComparePage();
     }
 
-    private void getTwoTitleOfProduct() {
-
+    private void setTwoTitleOfProduct() {
         nameOfTwoElement.add(nameOfFirstProductText.getText());
         nameOfTwoElement.add(nameOfSecondProductText.getText());
     }
 
-    private void getTwoTitleOfProductOnComparePage() {
+    private void setTwoTitleOfProductOnComparePage() {
         nameOfTwoElementCompare.add(nameOfFirstProductOnComparePageText.getText());
         nameOfTwoElementCompare.add(nameOfSecondProductOnComparePageText.getText());
     }
 
-    public boolean compareTwoList () {
+    public boolean compareTwoListWithTitleFirstTwoProduct() {
         int count = 0;
         for (int i = 0; i < nameOfTwoElement.size(); i++) {
             for (int j = 0; j < nameOfTwoElement.size(); j++) {
@@ -190,7 +189,7 @@ public class YandexMarketMusicPage extends BasePage {
             return false;
     }
 
-    public void deleteProductFromCompare () {
+    public void deleteProductsFromCompare() {
         clickWithWait(deleteListSpan);
     }
 
@@ -199,9 +198,19 @@ public class YandexMarketMusicPage extends BasePage {
         return notProductDiv.getText();
     }
 
-    public void chooseCamera () {
-        clickWithWait(electronikLink);
-        moveToElementAndClick(actionCameraLink);
+    public void chooseProduct (String product) {
+        switch (product) {
+            case "camera":
+                clickWithWait(electronikLink);
+                moveToElementAndClick(actionCameraLink);
+                break;
+            case "fridges":
+                clickWithWait(tehnicLink);
+                moveToElementAndClick(fridgesLink);
+                break;
+            default:
+                break;
+        }
     }
 
     public void orderByPrice() {
@@ -259,11 +268,6 @@ public class YandexMarketMusicPage extends BasePage {
         return count;
     }
 
-    public void chooseFridges() {
-        clickWithWait(tehnicLink);
-        moveToElementAndClick(fridgesLink);
-    }
-
     public void chooseWidthToSort (String widthTo) {
         moveToElement(widthToInput);
         sendKeysWithWait(widthToInput, widthTo);
@@ -310,19 +314,39 @@ public class YandexMarketMusicPage extends BasePage {
         clickWithWait(metalicaFromDropDownLink);
     }
 
+    public void chooseArtistFromDropDown (String artist) {
+        switch (artist) {
+            case "Metallica":
+                clickWithWait(metalicaFromDropDownLink);
+                break;
+            case "Beyonce":
+                wait.sleep(3);
+                clickWithWait(beyonceFromDropDownLink);
+
+                break;
+            default:
+                break;
+        }
+    }
+
     public String getNameOfArtist () {
         wait.visibleWithoutInputParamWait(titleOfArtistPageText);
         return titleOfArtistPageText.getText();
     }
 
-    public int countOfNotMetallica () {
+    public int countOfNotRequiredBand(String band) {
         int count = 0;
-        List<String> namesOfBand = new ArrayList<>();
-        List<WebElement> band = webDriver.findElements(namesBandOfPopularAlbums);
-        for (WebElement e : band) {
-            if (!e.getText().equals("Metallica")) {
-                count++;
-            }
+        switch (band) {
+            case "Metallica":
+                List<WebElement> namesOfBand = webDriver.findElements(namesBandOfPopularAlbums);
+                for (WebElement e : namesOfBand) {
+                    if (!e.getText().equals("Metallica")) {
+                        count++;
+                    }
+                }
+                break;
+            default:
+                break;
         }
         return count;
     }
@@ -353,7 +377,7 @@ public class YandexMarketMusicPage extends BasePage {
         return true;
     }
 
-    public String getCurrentTimeTrackAfterPause () {
-        return currentTimeTrack = getCurrentPlayingTime();
+    public void setCurrentTimeTrackAfterPause() {
+        currentTimeTrack = getCurrentPlayingTime();
     }
 }
