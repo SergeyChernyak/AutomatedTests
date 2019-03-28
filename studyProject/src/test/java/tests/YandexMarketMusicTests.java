@@ -63,6 +63,9 @@ public class YandexMarketMusicTests extends BaseTest {
         yandexMarketMusicPage.chooseWidthToSort("50");
         Assert.assertTrue(yandexMarketMusicPage.getTitleSortOfMarketPage().contains("шириной до 50 см"),
                 "Not sorted by width");
+        Assert.assertEquals(java.util.Optional.ofNullable(yandexMarketMusicPage.getCountWhereValueMoreRequirement(
+                yandexMarketMusicPage.getAllSizesOfProducts(), 50)),
+                java.util.Optional.of(0));
     }
 
     @Test
@@ -71,8 +74,6 @@ public class YandexMarketMusicTests extends BaseTest {
         yandexMarketMusicPage.enterLogin("AutotestUser");
         yandexMarketMusicPage.enterPassword("AutotestUser123");
         yandexMarketMusicPage.loginToMail();
-        Assert.assertEquals(yandexMarketMusicPage.getNameOfUser(),
-                "AutotestUser", "Not correct user");
 
         yandexMarketMusicPage.openPage("https://yandex.by/");
         yandexMarketMusicPage.goToMusicPage();
@@ -94,21 +95,18 @@ public class YandexMarketMusicTests extends BaseTest {
         yandexMarketMusicPage.enterLogin("AutotestUser");
         yandexMarketMusicPage.enterPassword("AutotestUser123");
         yandexMarketMusicPage.loginToMail();
-        Assert.assertEquals(yandexMarketMusicPage.getNameOfUser(),
-                "AutotestUser", "Not correct user");
 
         yandexMarketMusicPage.openPage("https://yandex.by/");
         yandexMarketMusicPage.goToMusicPage();
         yandexMarketMusicPage.searchArtist("beyo");
         yandexMarketMusicPage.chooseArtistFromDropDown("Beyonce");
         yandexMarketMusicPage.playPauseFirstMusic();
-        wait.sleep(10);
+
         Assert.assertTrue(yandexMarketMusicPage.isPlayingTrack(),
                 "Track not playing");
 
         yandexMarketMusicPage.playPauseFirstMusic();
         yandexMarketMusicPage.setCurrentTimeTrackAfterPause();
-        wait.sleep(10);
         Assert.assertEquals(yandexMarketMusicPage.getCurrentPlayingTime(),
                 yandexMarketMusicPage.currentTimeTrack,
                 "Track not paused");

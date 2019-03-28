@@ -128,6 +128,7 @@ public class YandexMarketMusicPage extends BasePage {
     private WebElement musicPrigressBar;
 
     private By priceOfAllProduct = By.cssSelector(".n-snippet-cell2__price div[class='price']");
+    private By sizesOfProducts = By.cssSelector(".n-snippet-card2__content>ul>li:nth-child(1)");
     private By namesBandOfPopularAlbums = By.cssSelector(".page-artist__albums .album__artist");
 
     public void goToMarket () {
@@ -268,6 +269,32 @@ public class YandexMarketMusicPage extends BasePage {
         return count;
     }
 
+    public double[] getAllSizesOfProducts () {
+        List<String> sizesAllProduct = new ArrayList<>();
+
+        List<WebElement> sizes = webDriver.findElements(sizesOfProducts);
+        for (WebElement e : sizes) {
+            String temp = e.getText();
+            String strSize = temp.split("x")[0];
+            sizesAllProduct.add(strSize);
+        }
+        double[] arrSizesAllProduct = new double[sizesAllProduct.size()];
+        for (int i = 0; i< arrSizesAllProduct.length; i++) {
+            arrSizesAllProduct[i] = Double.parseDouble(sizesAllProduct.get(i));
+        }
+        return arrSizesAllProduct;
+    }
+
+    public Integer getCountWhereValueMoreRequirement (double[] paramOfProduct,int requirementValue) {
+        int count = 0;
+        for (int i = 0; i < paramOfProduct.length; i++) {
+            if (paramOfProduct[i] > requirementValue) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void chooseWidthToSort (String widthTo) {
         moveToElement(widthToInput);
         sendKeysWithWait(widthToInput, widthTo);
@@ -295,6 +322,7 @@ public class YandexMarketMusicPage extends BasePage {
 
     public void loginToMail() {
         clickWithWait(enterButton);
+        wait.visibleWithoutInputParamWait(nameOfUserText);
     }
 
     public String getNameOfUser () {
@@ -363,6 +391,7 @@ public class YandexMarketMusicPage extends BasePage {
 
     public void playPauseFirstMusic() {
         clickWithWait(firstMusicButton);
+        wait.sleep(10);
     }
 
     public String getCurrentPlayingTime() {
