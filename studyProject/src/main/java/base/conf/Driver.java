@@ -24,8 +24,8 @@ public class Driver {
                 case "chrome":
                     System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
                     chromeOptions.addArguments("disable-infobars");
-                    chromeOptions.addArguments("--headless");
-                    chromeOptions.addArguments("--user-data-dir=C:\\Users\\Andersen\\Desktop");
+//                    chromeOptions.addArguments("--headless");
+//                    chromeOptions.addArguments("--user-data-dir=C:\\Users\\Andersen\\Desktop");
                     webDriver = new ChromeDriver(chromeOptions);
                     break;
                 case "firefox":
