@@ -8,9 +8,9 @@ import base.util.Wait;
 
 public class BasePage {
 
-    private Wait wait = new Wait(Driver.getWebDriver());
-    private Actions actions = new Actions(Driver.getWebDriver());
-    private JavascriptExecutor executor = (JavascriptExecutor)Driver.getWebDriver();
+    private final Wait wait = new Wait(Driver.getWebDriver());
+    private final Actions actions = new Actions(Driver.getWebDriver());
+    private final JavascriptExecutor executor = (JavascriptExecutor)Driver.getWebDriver();
 
     protected void sendKeysWithWait(WebElement webElement, String string) {
         wait.visibleWithoutInputParamWait(webElement);
