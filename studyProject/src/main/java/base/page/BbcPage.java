@@ -2,6 +2,8 @@ package base.page;
 
 import base.conf.BasePage;
 import base.util.Wait;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +24,8 @@ public class BbcPage extends BasePage {
     @FindBy(css = "#orb-search-q")
     private WebElement searchInput;
 
-    @FindBy(css = "#orb-nav-links li.orb-nav-weather")
+//    @FindBy(css = "#orb-nav-links li.orb-nav-weather")
+    @FindBy(xpath = "//*[@class='orb-nav-weather']")
     private WebElement weatherButton;
 
     public BbcPage textEnter(String str) {
@@ -34,6 +37,7 @@ public class BbcPage extends BasePage {
     }
 
     public BbcPage clickOnNavigationWeatherButton() {
+        clickWithWait(webDriver.findElement(By.id("orb-nav-more")));
         clickWithWait(weatherButton);
         return this;
     }

@@ -1,9 +1,10 @@
 package base.conf;
 
-import base.util.Wait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
+import base.util.Wait;
 
 public class BasePage {
 

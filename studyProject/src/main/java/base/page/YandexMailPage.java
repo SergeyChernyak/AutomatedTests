@@ -1,7 +1,9 @@
 package base.page;
 
-import base.conf.BasePage;
-import base.util.Wait;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
+import base.conf.BasePage;
+import base.util.Wait;
 
 public class YandexMailPage extends BasePage {
 

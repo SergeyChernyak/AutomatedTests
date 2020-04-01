@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Parameters;
 
 import java.util.Objects;
@@ -15,7 +14,7 @@ public class Driver {
 
     private static WebDriver webDriver;
     private static final int IMPLICIT_WAIT = 5;
-    private static ChromeOptions chromeOptions = new ChromeOptions();
+    private static final ChromeOptions chromeOptions = new ChromeOptions();
 
     @Parameters("browser")
     private static WebDriver getDriver(String browser) {
